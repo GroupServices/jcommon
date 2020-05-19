@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.group.jcommon.proto.text";
+option java_outer_classname = "TextProtos";
+option objc_class_prefix = "JCommon";
+
+package common.text;
+
+message TextBullet {
+    string text = 1;
+    string color = 2;
+    bool highlight = 3;
+    string highlightColor = 4;
+}
