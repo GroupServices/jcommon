@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import org.group.jcommon.jackson.DataFormatException;
+import org.group.jcommon.proto.text.TextBullet;
 import org.junit.Test;
 
 public class ObjectMappersTestCase {
@@ -150,55 +151,53 @@ public class ObjectMappersTestCase {
         assertTrue(caught);
     }
 
-    // static class Wrapper {
-    // @JsonProperty
-    // String stringField;
-    // @JsonProperty
-    // List<TextBullet> bullets;
-    // }
+    static class Wrapper {
+        @JsonProperty
+        String stringField;
+        @JsonProperty
+        List<TextBullet> bullets;
+    }
 
-    // @Test
-    // public void testEmbeddedProtobuf() {
-    // Wrapper wrapper = new Wrapper();
-    // wrapper.stringField = "hello world";
-    // wrapper.bullets = Lists.newArrayList();
-    // for (int i = 0; i < 1000; i++) {
-    // wrapper.bullets.add(TextBullet.newBuilder().setText(String.format("event_%d",
-    // i)).build());
-    // }
-    // String json = ObjectMappers.mustWriteValue(wrapper);
+    @Test
+    public void testEmbeddedProtobuf() {
+        Wrapper wrapper = new Wrapper();
+        wrapper.stringField = "hello world";
+        wrapper.bullets = Lists.newArrayList();
+        for (int i = 0; i < 1000; i++) {
+            wrapper.bullets.add(TextBullet.newBuilder().setText(String.format("event_%d", i)).build());
+        }
+        String json = ObjectMappers.mustWriteValue(wrapper);
 
-    // Wrapper deserialized = ObjectMappers.mustReadValue(json, Wrapper.class);
-    // assertEquals("hello world", deserialized.stringField);
-    // assertEquals(1000, wrapper.bullets.size());
-    // for (int i = 0; i < 1000; i++) {
-    // assertEquals(String.format("event_%d", i), wrapper.bullets.get(i).getText());
-    // }
-    // }
+        Wrapper deserialized = ObjectMappers.mustReadValue(json, Wrapper.class);
+        assertEquals("hello world", deserialized.stringField);
+        assertEquals(1000, wrapper.bullets.size());
+        for (int i = 0; i < 1000; i++) {
+            assertEquals(String.format("event_%d", i), wrapper.bullets.get(i).getText());
+        }
+    }
 
-    // @Test
-    // public void testOmitDefaultValue() {
-    // Wrapper wrapper = new Wrapper();
-    // wrapper.stringField = "hello world";
-    // wrapper.bullets = Lists.newArrayList();
-    // wrapper.bullets.add(TextBullet.newBuilder().setText("bullet").build());
+    @Test
+    public void testOmitDefaultValue() {
+        Wrapper wrapper = new Wrapper();
+        wrapper.stringField = "hello world";
+        wrapper.bullets = Lists.newArrayList();
+        wrapper.bullets.add(TextBullet.newBuilder().setText("bullet").build());
 
-    // String json = ObjectMappers.mustWriteValue(wrapper);
-    // assertEquals(-1, json.indexOf("highlight"));
-    // }
+        String json = ObjectMappers.mustWriteValue(wrapper);
+        assertEquals(-1, json.indexOf("highlight"));
+    }
 
-    // @Test
-    // public void testReadWriteProtobuf() {
-    // TextBullet ui = TextBullet.newBuilder().setText("FIRST_USE").build();
-    // String json = ObjectMappers.mustWriteValue(ui);
+    @Test
+    public void testReadWriteProtobuf() {
+        TextBullet ui = TextBullet.newBuilder().setText("FIRST_USE").build();
+        String json = ObjectMappers.mustWriteValue(ui);
 
-    // TextBullet deserialized = ObjectMappers.mustReadValue(json,
-    // TextBullet.class);
-    // assertEquals("FIRST_USE", deserialized.getText());
-    // assertEquals("", deserialized.getColor());
+        TextBullet deserialized = ObjectMappers.mustReadValue(json, TextBullet.class);
+        assertEquals("FIRST_USE", deserialized.getText());
+        assertEquals("", deserialized.getColor());
 
-    // deserialized = ObjectMappers.mustReadProto(json, TextBullet.class);
-    // assertEquals("FIRST_USE", deserialized.getText());
-    // assertEquals("", deserialized.getColor());
-    // }
+        deserialized = ObjectMappers.mustReadProto(json, TextBullet.class);
+        assertEquals("FIRST_USE", deserialized.getText());
+        assertEquals("", deserialized.getColor());
+    }
 }
