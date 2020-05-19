@@ -12,13 +12,13 @@ public class EnumUtil {
     public static <T extends Enum<T>> T fromNameOr(String name, Class<T> clazz, T d3fault) {
         Preconditions.checkNotNull(clazz);
         Preconditions.checkNotNull(d3fault);
-        Optional<T> r = Enums.<T>getIfPresent(clazz, StringUtils.trimToEmpty(name));
+        Optional<T> r = Enums.getIfPresent(clazz, StringUtils.trimToEmpty(name));
         return r.isPresent() ? r.get() : d3fault;
     }
 
     public static <T extends Enum<T>> T fromNameOrNull(String name, Class<T> clazz) {
         Preconditions.checkNotNull(clazz);
-        Optional<T> r = Enums.<T>getIfPresent(clazz, StringUtils.trimToEmpty(name));
+        Optional<T> r = Enums.getIfPresent(clazz, StringUtils.trimToEmpty(name));
         return r.isPresent() ? r.get() : null;
     }
 
