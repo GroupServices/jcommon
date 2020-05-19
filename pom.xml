@@ -18,7 +18,10 @@
         <!-- defines the version for dependencies -->
         <jackson.version>2.10.0</jackson.version>
         <guava.version>29.0-jre</guava.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13</junit.version>
+        <junit.vintage.version>5.6.2</junit.vintage.version>
+        <junit-jupiter.version>5.6.2</junit-jupiter.version>
+        <junit-platform.version>1.6.2</junit-platform.version>
         <javax.ws.rs.version>2.1.1</javax.ws.rs.version>
         <findbugs.version>3.0.0</findbugs.version>
         <slf4j.version>1.7.30</slf4j.version>
@@ -128,10 +131,46 @@
                 <artifactId>grpc-protobuf</artifactId>
                 <version>${grpc.version}</version>
             </dependency>
-            <dependency>
+            <!-- <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency> -->
+            <dependency>
+                <groupId>org.junit.vintage</groupId>
+                <artifactId>junit-vintage-engine</artifactId>
+                <version>${junit.vintage.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-migrationsupport</artifactId>
+                <version>${junit.vintage.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.platform</groupId>
+                <artifactId>junit-platform-runner</artifactId>
+                <version>${junit-platform.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -309,6 +348,14 @@
                     <doUpdate>false</doUpdate>
                     <!-- Default value of `git rev-parse \-\-short` -->
                     <shortRevisionLength>7</shortRevisionLength>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <includeTags>junit5</includeTags>
+                    </properties>
                 </configuration>
             </plugin>
         </plugins>
