@@ -23,7 +23,7 @@ public class PropertyNamingStrategyWrapper extends PropertyNamingStrategyBase {
         return delegate.translate(fieldName);
     }
 
-    static class SnakeToCamelNamingStrategy extends PropertyNamingStrategyBase {
+    public static class SnakeToCamelNamingStrategy extends PropertyNamingStrategyBase {
 
         @Override
         public String translate(String fieldName) {

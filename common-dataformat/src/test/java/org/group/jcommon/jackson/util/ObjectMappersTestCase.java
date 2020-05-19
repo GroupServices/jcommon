@@ -15,7 +15,7 @@ import com.google.common.collect.Sets;
 
 import org.group.jcommon.jackson.DataFormatException;
 import org.group.jcommon.proto.text.TextBullet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ObjectMappersTestCase {
     static class Order {
