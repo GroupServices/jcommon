@@ -8,6 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
+/**
+ * EnumUtil Depend on {@link Enums}.
+ */
 public class EnumUtil {
     public static <T extends Enum<T>> T fromNameOr(String name, Class<T> clazz, T d3fault) {
         Preconditions.checkNotNull(clazz);
