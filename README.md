@@ -6,6 +6,6 @@ common utils supported by Java.
 
 * json utils
 * lifecycle
-* time utils
+* common utils
 
 > Present by Lance. Contact to `lancexu.hello@gmail.com`
