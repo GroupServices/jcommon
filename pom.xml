@@ -32,12 +32,25 @@
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
     </properties>
 
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
     <scm>
-        <connection>scm:git:git@github.com:major2015/jcommon.git</connection>
-        <developerConnection>scm:git:git@github.com:major2015/jcommon.git</developerConnection>
-        <url>scm:git:git@github.com:major2015/jcommon.git</url>
-        <tag>HEAD</tag>
+        <tag>master</tag>
+        <url>https://github.com/GroupServices/jcommon.git</url>
+        <connection>scm:git:https://github.com/GroupServices/jcommon.git</connection>
+        <developerConnection>scm:git:https://github.com:GroupServices/jcommon.git</developerConnection>
     </scm>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
     <developers>
         <developer>
